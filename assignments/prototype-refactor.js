@@ -7,42 +7,77 @@ Prototype Refactor
 2. Your goal is to refactor all of this code to use ES6 Classes. The console.log() statements should still return what is expected of them.
 
 */
-function GameObject(attributes) {
-  this.createdAt = attributes.createdAt;
-  this.name = attributes.name;
+// function GameObject(attributes) {
+//   this.createdAt = attributes.createdAt;
+//   this.name = attributes.name;
+// }
+class GameObject {
+  constructor(attributes) {
+    this.createdAt = attributes.createdAt;
+    this.name = attributes.name;
+  }
+  destroy = function() {
+    return `${this.name} was removed from the game.`;
+  };
+  dimensions = function(length, width, height) {
+    this.length = length;
+    this.width = width;
+    this.height = height;
+  };
 }
+// GameObject.prototype.destroy = function() {
+//   return `${this.name} was removed from the game.`;
+// };
 
-GameObject.prototype.destroy = function() {
-  return `${this.name} was removed from the game.`;
-};
-
-GameObject.prototype.dimensions = function(length, width, height) {
-  this.length = length;
-  this.width = width;
-  this.height = height;
-};
-
-function CharacterStats(stats) {
-  GameObject.call(this, stats); // derives game object as a parent and binds this keyword to parent
-  this.healthPoints = stats.healthPoints;
+// GameObject.prototype.dimensions = function(length, width, height) {
+//   this.length = length;
+//   this.width = width;
+//   this.height = height;
+// };
+class CharacterStats extends GameObject {
+  constructor(stats) {
+    super(stats);
+    this.healthPoints = stats.healthPoints;
+  }
 }
-CharacterStats.prototype = Object.create(GameObject.prototype);
-CharacterStats.prototype.takeDamage = function() {
-  return `${this.name} took damage.`;
-};
+// function CharacterStats(stats) {
+//   GameObject.call(this, stats); // derives game object as a parent and binds this keyword to parent
+//   this.healthPoints = stats.healthPoints;
+// }
 
-function Humanoid(human) {
-  CharacterStats.call(this, human);
-  this.team = human.team;
-  this.weapons = human.weapons;
-  this.language = human.language;
+// CharacterStats.prototype = Object.create(GameObject.prototype);
+
+takeDamage = function() {
+  return `${this.name} take damage.`;
+};
+// CharacterStats.prototype.takeDamage = function() {
+//   return `${this.name} took damage.`;
+// };
+
+class Humanoid extends GameObject {
+  constructor(human) {
+    super(human);
+    this.team = human.team;
+    this.weapons = human.weapons;
+    this.language = human.language;
+  }
+  greet = function() {
+    return `${this.name} offers a greeting in ${this.language}.`;
+  };
 }
-Humanoid.prototype = Object.create(CharacterStats.prototype); // adds gameObjects prototype to Character stats prototype and takes care of inheriting
+// function Humanoid(human) {
+//   CharacterStats.call(this, human);
+//   this.team = human.team;
+//   this.weapons = human.weapons;
+//   this.language = human.language;
+// }
+
+// Humanoid.prototype = Object.create(CharacterStats.prototype); // adds gameObjects prototype to Character stats prototype and takes care of inheriting
 //destroy() from GameObject through CharacterStats and take damage
 
-Humanoid.prototype.greet = function() {
-  return `${this.name} offers a greeting in ${this.language}.`;
-};
+// Humanoid.prototype.greet = function() {
+//   return `${this.name} offers a greeting in ${this.language}.`;
+// };
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
