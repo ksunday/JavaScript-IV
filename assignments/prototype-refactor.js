@@ -47,9 +47,6 @@ class CharacterStats extends GameObject {
 
 // CharacterStats.prototype = Object.create(GameObject.prototype);
 
-takeDamage = function() {
-  return `${this.name} take damage.`;
-};
 // CharacterStats.prototype.takeDamage = function() {
 //   return `${this.name} took damage.`;
 // };
@@ -64,6 +61,9 @@ class Humanoid extends GameObject {
   greet = function() {
     return `${this.name} offers a greeting in ${this.language}.`;
   };
+  takeDamage() {
+    return `${this.name} take damage.`;
+  }
 }
 // function Humanoid(human) {
 //   CharacterStats.call(this, human);
@@ -72,7 +72,7 @@ class Humanoid extends GameObject {
 //   this.language = human.language;
 // }
 
-// Humanoid.prototype = Object.create(CharacterStats.prototype); // adds gameObjects prototype to Character stats prototype and takes care of inheriting
+Humanoid.prototype = Object.create(CharacterStats.prototype); // adds gameObjects prototype to Character stats prototype and takes care of inheriting
 //destroy() from GameObject through CharacterStats and take damage
 
 // Humanoid.prototype.greet = function() {
