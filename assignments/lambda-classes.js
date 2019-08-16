@@ -6,7 +6,7 @@ class Person {
     this.location = Pers.location;
   }
   Speak = function() {
-    return `Hello my name is ${this.name}, I am from ${this.location}`;
+    console.log(`Hello my name is ${this.name}, I am from ${this.location}`);
   };
 }
 
@@ -18,10 +18,10 @@ class Instructor extends Person {
     this.catchPhrase = Inst.catchPhrase;
   }
   demo = function(subject) {
-    return `Today we are learning about ${subject}`;
+    console.log(`Today we are learning about ${subject}`);
   };
   grade = function(student, subject) {
-    return `${Student.name} receives a perfect score on ${subject}`;
+    console.log(`${Student.name} receives a perfect score on ${subject}`);
   };
 }
 
@@ -33,13 +33,16 @@ class Student extends Person {
     this.favSubjects = Stud.favSubjects;
   }
   listsSubjects = function() {
-    return `My favorite subjects are ${favSubjects}`;
+    this.favSubjects.forEach(element => {
+      console.log(`I enjoy ${element}`);
+    });
   };
+
   PRAssignment = function(subject) {
-    return `${Student.name} has submitted a PR for ${subject}`;
+    console.log(`${Student.name} has submitted a PR for ${subject}`);
   };
   sprintChallenge = function(subject) {
-    return `${student.name} has begun sprint challenge on ${subject}`;
+    console.log(`${student.name} has begun sprint challenge on ${subject}`);
   };
 }
 class TeamLead extends Instructor {
@@ -88,4 +91,35 @@ const Kyle = new Student({
   subject: "Javascript"
 });
 
-console.log(Pace.demo);
+console.log("====instructors====");
+console.log(Pace);
+
+console.log("====students====");
+console.log(Kyle);
+
+console.log("====PMs====");
+console.log(Navid);
+console.log("               ==========stuff that they can do==========");
+console.log(" ");
+console.log("           ===everyone can speak()===");
+console.log(Pace.Speak());
+console.log(Kyle.Speak());
+console.log(Navid.Speak());
+console.log(" ");
+console.log("           ===teachers and pms can demo() and grade()===");
+console.log(Pace.demo("JavaScript"));
+console.log(Pace.grade(Kyle, "JavaScript"));
+console.log(Navid.demo("Swift"));
+console.log(Navid.grade(Kyle, "Swift"));
+console.log(" ");
+console.log("           ===only PMs can standUp() and debugsCode()===");
+console.log(Navid.standUp("WEBpt9"));
+console.log(Navid.debugsCode(Kyle, "JavaScript"));
+console.log(" ");
+console.log(
+  "           ===only students can listsSubjects(),PRAssignment(subject), and sprintChallenge(subject)==="
+);
+console.log(Kyle.listsSubjects());
+console.log(Kyle.PRAssignment("prototypes"));
+console.log(Kyle.sprintChallenge("classes"));
+console.log(" ");
